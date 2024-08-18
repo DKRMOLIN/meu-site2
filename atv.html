@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Distribuição de Senha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Tela do Usuário -->
+        <div class="screen" id="user-screen">
+            <h2>Usuário</h2>
+            <p>Bem-vindo! Clique no botão abaixo para gerar sua senha.</p>
+            <button id="generate-button">Gerar Senha</button>
+        </div>
+
+        <!-- Tela da Senha -->
+        <div class="screen" id="password-screen">
+            <h2>Senha Gerada</h2>
+            <p id="password">Aqui aparecerá a senha gerada.</p>
+            <p id="timestamp">Horário de saída: Aqui aparecerá o horário.</p>
+        </div>
+
+        <!-- Nova Tela com Senha e Hora -->
+        <div class="screen" id="info-screen">
+            <h2>Sua Senha e Hora</h2>
+            <p id="info">Sua senha é: horário :</p>
+        </div>
+    </div>
+
+    <script>
+        let currentNumber = 1;
+
+        // Função para gerar a próxima senha
+        function generatePassword() {
+            const maxNumber = 100;
+            if (currentNumber > maxNumber) {
+                currentNumber = 1; // Reinicia a contagem
+            }
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const time = `${hours}:${minutes}:${seconds}`;
+
+            // Atualiza o conteúdo das telas
+            document.getElementById('password').textContent = `Sua senha é: ${currentNumber}`;
+            document.getElementById('timestamp').textContent = `Horário de saída: ${time}`;
+            document.getElementById('info').textContent = `Sua senha é: ${currentNumber}: horário : ${time}`;
+            
+            currentNumber++;
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById('generate-button').addEventListener('click', generatePassword);
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
